@@ -31,9 +31,9 @@ pipeline {
                             sh """
                                 # Check if release already exists
                                 if helm status ${BRANCH_NAME} --kubeconfig ${MY_KUBECONFIG} >/dev/null 2>&1; then
-                                    helm upgrade ${BRANCH_NAME} ./Deployment -f ./Deployment/${BRANCH_NAME}values.yaml --set image.repository=mohamedsamirebrahim/dotnetcoreapp${BRANCH_NAME},image.tag=${BUILD_NUMBER},database-password=${DATABASE_PASSWORD} --kubeconfig ${MY_KUBECONFIG}
+                                    helm upgrade ${BRANCH_NAME} ./Deployment -f ./Deployment/${BRANCH_NAME}values.yaml --set image.repository=mohamedsamirebrahim/dotnetcoreapp${BRANCH_NAME},image.tag=${BUILD_NUMBER},databasepassword=${DATABASE_PASSWORD} --kubeconfig ${MY_KUBECONFIG}
                                 else
-                                    helm install ${BRANCH_NAME} ./Deployment -f ./Deployment/${BRANCH_NAME}values.yaml --set image.repository=mohamedsamirebrahim/dotnetcoreapp${BRANCH_NAME},image.tag=${BUILD_NUMBER},database-password=${DATABASE_PASSWORD} --kubeconfig ${MY_KUBECONFIG}
+                                    helm install ${BRANCH_NAME} ./Deployment -f ./Deployment/${BRANCH_NAME}values.yaml --set image.repository=mohamedsamirebrahim/dotnetcoreapp${BRANCH_NAME},image.tag=${BUILD_NUMBER},databasepassword=${DATABASE_PASSWORD} --kubeconfig ${MY_KUBECONFIG}
                                 fi
                             """
                         }

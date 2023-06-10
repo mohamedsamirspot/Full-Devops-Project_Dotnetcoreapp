@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: webapp
-          image: mohamedsamirebrahim/dotnetcoreapp{{ .Values.namespace }}:{{ .Values.image.tag }}
+          image: mohamedsamirebrahim/dotnetcoreapp{{ .Values.namespace }}:v{{ .Values.image.tag }}
           ports:
             - containerPort: 80
           env:

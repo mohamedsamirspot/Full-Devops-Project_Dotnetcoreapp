@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: "1.0"
+version: 0.1.0
+name: web-app-chart # for repos repo-name/name
+description: A Helm chart for deploying dotnetcore app with mysql database to be deployed in Kubernetes cluster
+type: application

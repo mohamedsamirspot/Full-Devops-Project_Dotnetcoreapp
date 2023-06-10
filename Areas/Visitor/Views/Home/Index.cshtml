@@ -1,0 +1,50 @@
+﻿@model IndexViewModel 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+
+<br /><br />
+     <div class="backgroundWhite container">
+
+    <select id="list-filters" class="offset-5 menu-filter-list menu-inline text-center active btn btn-secondary">
+        <option value=".list-items">Show All</option>
+           @foreach (var item in Model.Category)
+           {
+               <option value=".@item.Name.Replace(" ",string.Empty)">@item.Name</option>
+           }
+    </select>
+          @foreach(var category in Model.Category) 
+          {
+              <div class="row" id="menu-wrapper">
+                  <partial name="_ThumbnailAreaPartial" model="@Model.News.Where(u=>u.Category.Name.Equals(category.Name))" />
+              </div>
+          }
+      </div>
+
+
+@* jquery *@ 
+
+@section Scripts{ 
+      <script src="https://code.jquery.com/jquery-3.3.1.js"
+              integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+              crossorigin="anonymous"></script>
+
+<script>
+    (function ($) {
+            $("#list-filters").click(function () {
+                var selectedFilter = $(this).val();
+                $(".list-items").fadeOut();
+                setTimeout(function () {
+                    $(selectedFilter).slideDown();
+                }, 300);
+            });
+    })(jQuery);
+ 
+</script>
+}
+
+

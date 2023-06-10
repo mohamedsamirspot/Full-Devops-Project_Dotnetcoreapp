@@ -1,0 +1,82 @@
+﻿@model NewsAndCategoryViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<br />
+<h2 class="text-info">Delete News</h2>
+<br />
+<form method="post">
+    <div class="backgroundWhiteBorder row">
+        <div class="col-8">
+            <input type="hidden" asp-for="News.Id" />
+            <fieldset disabled>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="News.Title" class="custom-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="News.Title" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="News.Description" class="custom-label"></label>
+                    </div>
+                    <div class="col-8">
+                        @Html.TextAreaFor(m => m.News.Description)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="News.NewsDate" class="custom-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="News.NewsDate" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="News.CategoryId" class="custom-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="News.Category.Name" class="form-control" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+            @if (@Model.News.Image == "noimage.png")
+            {
+                <img src="~/media/news/@Model.News.Image" width="100" alt="" style="border-radius:5px;border:1px solid #bbb9b9;" />
+            }
+            else
+            {
+                <img src="~/media/news/@Model.News.Category.Name/@Model.News.Image" width="100" alt="" style="border-radius:5px;border:1px solid #bbb9b9;" />
+
+            }
+        </div>
+        <div class="col-8">
+            <div class="col-8 offset-4">
+                <partial name="_DeleteAndBackToListButton" model="Model.News.Id" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+        <script>
+                tinymce.init({
+                    selector: 'textarea',
+                    plugins: "lists",
+                    toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist",
+                    menubar: 'file edit format',
+                    readonly: 1
+                });</script>
+        <script>tinymce.init({ selector: 'textarea' });</script>
+
+}

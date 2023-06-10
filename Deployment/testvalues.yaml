@@ -1,0 +1,10 @@
+image:
+  repository: ""
+  tag: ""
+
+deployment:
+  name: test-dep
+
+namespace: test
+
+databasepassword: ""

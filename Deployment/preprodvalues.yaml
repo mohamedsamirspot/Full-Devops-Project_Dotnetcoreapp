@@ -1,0 +1,10 @@
+image:
+  repository: ""
+  tag: ""
+
+deployment:
+  name: preprod-dep
+
+namespace: preprod
+
+databasepassword: ""

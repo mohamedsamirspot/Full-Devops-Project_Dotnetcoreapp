@@ -1,0 +1,56 @@
+﻿@model CategoriesViewModel
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info"> Category List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <partial name="_CreateButtonPartial" />
+        </div>
+    </div>
+    <br />
+    <div>
+        @if (Model.Categories.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayNameFor(c => c.Categories[0].Name)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.Categories)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.Name)   
+                        </td>
+                        <td>
+                            <partial name="_TableButtonPartial" model="item.Id" /> 
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div page-model="@Model.PagingInfo" page-classes-enabled="true" page-class="btn border"
+                 page-class-normal="btn btn-light" page-class-selected="btn btn-info active"
+                 class="btn-group float-right">
+            </div>
+            <br />
+        }
+        else
+        {
+            <p style="color:red">No category exists...</p>
+        }
+    </div>
+</div>
+

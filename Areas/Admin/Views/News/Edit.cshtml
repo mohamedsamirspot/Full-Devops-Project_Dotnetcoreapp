@@ -1,0 +1,162 @@
+﻿@model NewsAndCategoryViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Edit News</h2>
+<br />
+
+<div class="border backgroundWhite row">
+    <div class="col-8 border-right">
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+        <input type="hidden" asp-for="News.Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="News.CategoryId" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <select id="ddlCategorylist" asp-for="News.CategoryId" asp-items="@(new SelectList(Model.CategoryList,"Id","Name"))" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="News.Title" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="News.Title" class="form-control" />
+            </div>
+            <span asp-validation-for="News.Title" class="text-danger"></span>
+        </div>
+
+
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="News.Description" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    @Html.TextAreaFor(m => m.News.Description)
+                </div>
+                <span asp-validation-for="News.Description" class="text-danger"></span>
+            </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="News.NewsDate" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="News.NewsDate" class="form-control" />
+            </div>
+            <span asp-validation-for="News.NewsDate" class="text-danger"></span>
+        </div>
+
+
+            <input type="hidden" asp-for="News.Image" />
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="News.Image" class="control-label">News Image</label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="News.ImageUpload" class="form-control" />
+                </div>
+                <span asp-validation-for="News.ImageUpload" class="text-danger"></span>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-3 offset-1">
+                @if (@Model.News.Image == "noimage.png")
+                {
+                    <img src="~/media/news/@Model.News.Image" width="100" alt="" />
+
+                }
+                else
+                {
+                    <img src="~/media/news/@Model.News.Category.Name/@Model.News.Image" width="100" alt="" />
+
+                }            
+            </div>
+        <div class="col-8">
+            <div class="col-8 offset-4">
+                <partial name="_EditAndBackToListButton" model="Model.News.Id"/>
+            </div>
+        </div>
+</form>
+    </div>
+@*        <div class="col-3 offset-1">
+
+        <p> Existing News: </p>
+
+        <div id="NewsList">
+            <ul class="list-group"></ul>
+        </div>
+
+    </div>*@
+
+
+
+</div>
+
+
+@section Scripts{
+
+
+
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: "lists",
+            menubar: 'file edit format'
+        });
+
+    </script>
+
+
+@*    <script>
+
+        function updateNewsList() {
+            var categorySelected = document.getElementById("ddlCategorylist").value;
+            $list = $('#NewsList');
+            $.ajax({
+                url: '/Admin/News/GetNews/' + categorySelected,
+                type: 'GET',
+                dataType: 'text',
+                success: function (data) {
+                    results = JSON.parse(data);
+                    $list.html('');
+                    $list.append(' <ul class="list-group"> ');
+                    for (i in results) {
+                        $list.append('<li class="list-group-item">' + results[i].text + '</li>');
+                    }
+                    $list.append('</ul>');
+                }
+
+            });
+
+        }
+
+
+        $(document).ready(function () {
+            updateNewsList();
+        });
+
+
+        $("#ddlCategorylist").on("change", function () {
+            updateNewsList();
+        });
+
+
+    </script>*@
+
+
+}

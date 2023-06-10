@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet-app-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dotnet-app
+  template:
+    metadata:
+      labels:
+        app: dotnet-app
+    spec:
+      containers:
+        - name: webapp
+          image: mohamedsamirebrahim/dotnetcoreapp:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: DBHOST
+              value: mysql-service
+            - name: DBPORT
+              value: "3306"
+            - name: DBPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password
+          volumeMounts:
+            - name: app-data
+              mountPath: /app/wwwroot/media/news
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: app-pvc

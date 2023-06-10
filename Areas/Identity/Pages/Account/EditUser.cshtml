@@ -1,0 +1,30 @@
+﻿@page "{id}"
+@using NewsSite.Utility
+@model EditUserModel
+
+<form method="post" asp-route-returnUrl="@Model.ReturnUrl" asp-route-id="Model">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (User.IsInRole(SD.Admin))
+        {
+            <div class="form-group row">
+                <div class="col-2">
+                </div>
+                <div class="col-5">
+                    <input type="radio" name="rdUserRole" value="@SD.Admin" checked /> @SD.Admin
+                </div>
+            </div>
+        }
+
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <button type="submit" class="btn btn-primary form-control">Register</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

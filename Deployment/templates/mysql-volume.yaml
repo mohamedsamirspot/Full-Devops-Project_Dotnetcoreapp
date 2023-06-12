@@ -17,7 +17,7 @@ metadata:
   name: mysql-pvc
   namespace: {{ .Values.namespace }}
 spec:
-  storageClassName: mysql-storage
+  storageClassName: mysql-storage-{{ .Values.namespace }}
   accessModes:
     - ReadWriteOnce
   resources:

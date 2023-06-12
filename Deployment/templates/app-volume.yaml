@@ -17,7 +17,7 @@ metadata:
   name: app-pvc
   namespace: {{ .Values.namespace }}
 spec:
-  storageClassName: dotnet-storage
+  storageClassName: dotnet-storage-{{ .Values.namespace }}
   accessModes:
     - ReadWriteOnce
   resources:

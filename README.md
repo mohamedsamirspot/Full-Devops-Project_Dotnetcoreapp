@@ -17,6 +17,11 @@ Using these technologies and tools:
 # Full-Devops-Project_Infrastructure:
 in this infrastructure we are going to prepair the gcp infra using terraform for our kubernates cluster to deploy our jenkins and our app to it.
 ![Image Description](Screenshots/Draw.io.jpg)
+
+
+https://github.com/mohamedsamirspot/Full-Devops-Project_Dotnetcoreapp/assets/71722372/a4922dca-bed0-4c95-ab24-48c6c6460acf
+
+
 ## GCP Infrastructure includes:
 - 1 VPC
 - Backend for saving the tfstate file of terraform
@@ -127,7 +132,7 @@ empty this file (known_hosts)
 - Now access master jenkins pod using the service loadbalancer ip
 
 ![Image Description](Screenshots/19.png)
-![Image Description](Screenshots/20.png)
+![Image Description](Screenshots/20.1.png)
 
       kubectl exec -it jenkins-master-pod-name -n jenkins -- bash
       cat /var/jenkins_home/secrets/initialAdminPassword
@@ -135,6 +140,9 @@ empty this file (known_hosts)
 or just get it from logs
       
       kubectl logs jenkins-master-dep-6c68d86f64-qqvq2 -n jenkins
+
+![Image Description](Screenshots/20.2.png)
+![Image Description](Screenshots/20.3.png)
 
 ![Image Description](Screenshots/21.png)
 
